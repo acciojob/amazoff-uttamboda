@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class OrderRepository {
 
-    private HashMap<String, Order> orderMap;
+    private Map<String, Order> orderMap = new HashMap<>();
     private HashMap<String, DeliveryPartner> partnerMap;
     private HashMap<String, HashSet<String>> partnerToOrderMap;
     private HashMap<String, String> orderToPartnerMap;
@@ -73,6 +73,9 @@ public class OrderRepository {
     public List<String> findAllOrders(){
         // your code here
         // return list of all orders
+        if (orderMap == null || orderMap.isEmpty()) {
+            return new ArrayList<>(); // Return an empty list if map is null or empty
+        }
         return new ArrayList<>(orderMap.keySet());
     }
 
