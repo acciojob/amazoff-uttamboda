@@ -79,18 +79,21 @@ public class OrderRepository {
         return new ArrayList<>(orderMap.keySet());
     }
 
-    public void deletePartner(String partnerId){
-        // your code here
-        // delete partner by ID
+    public String deletePartner(String partnerId) {
         if (partnerMap.containsKey(partnerId)) {
-            HashSet<String> orders = partnerToOrderMap.remove(partnerId);
+            HashSet<String> orders = partnerToOrderMap.get(partnerId);
             if (orders != null) {
                 for (String orderId : orders) {
                     orderToPartnerMap.remove(orderId);
                 }
             }
+            partnerToOrderMap.remove(partnerId);
             partnerMap.remove(partnerId);
+        } else {
+            System.out.println("Partner with ID " + partnerId + " does not exist.");
+            return "partner does not exist";
         }
+        return "partner removed successfully";
     }
 
     public void deleteOrder(String orderId){

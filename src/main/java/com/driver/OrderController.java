@@ -130,9 +130,9 @@ public class OrderController {
     public ResponseEntity<String> deletePartnerById(@PathVariable String partnerId){
 
         try {
-            orderService.deletePartner(partnerId);
+            String response = orderService.deletePartner(partnerId);
 
-            return new ResponseEntity<>(partnerId + " removed successfully", HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Partner not found or could not be removed", HttpStatus.NOT_FOUND);
         }
